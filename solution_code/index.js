@@ -2,14 +2,14 @@ const Person = require('./person.js');
 const Floor = require('./floor.js');
 const Elevator = require('./elevator.js');
 
-let pedro = new Person("Pedro", 1, 5);
+// let pedro = new Person("Pedro", 1, 5);
 let isa = new Person("Isa", 2, 6);
 let raul = new Person("Raul", 6, 3);
 
 let elevator = new Elevator();
 elevator.start();
 
-elevator.call(pedro);
+// elevator.call(pedro);
 elevator.call(isa);
 elevator.call(raul);
 // elevator.call({at: 5, to: 3});
