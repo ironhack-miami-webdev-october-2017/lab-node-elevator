@@ -1,6 +1,7 @@
 // First iteration everyone is in the basement
 // People is in different floors and wants to go to different floors. One by one.
 //
+var _ = require('lodash');
 
 class Elevator {
   constructor(){
@@ -10,7 +11,7 @@ class Elevator {
     this.idle        = true; //when true, the elevator is not serving any request
     this.waitingList = [];
     this.passengers  = [];
-    this.direction   = null;
+    this.direction   = "up";
     this.currentReq  = null;
   }
 
@@ -23,96 +24,79 @@ class Elevator {
   }
 
   update(){
-    if (this.idle && this.requests.length !== 0) {
-      this.idle = false;
-      this.currentReq = this.requests.shift();
-    } else {
-      if(this.requests.length !== 0 || this.currentReq){ this.log() };
+    this.log();
+    if (this.requests.length !== 0) {
+      this.requests = _.sortBy(_.uniq(this.requests))
 
-      if (this.currentReq < this.floor) {
-        console.log("Bajando");
-        this.floorDown();
-      } else if (this.currentReq > this.floor) {
-        console.log("Subiendo");
-        this.floorUp();
-      } else {
-        this.idle = true;
-        console.log(this.floor);
-        this.currentReq = null;
-
+      if (this.requests.includes(this.floor)) {
+        this.requests.splice(this.requests.indexOf(this.floor),1);
       }
+
+      if (this.direction === "up" && _.max(this.requests) > this.floor) {
+        this.floorUp();
+      }
+      if (this.direction === "down" && _.min(this.requests) < this.floor) {
+        this.floorDown();
+      }
+
+      // Check if someone needs to enter
       this.waitingList.forEach((person, index) => {
         if (person.originFloor === this.floor) {
           this.passengers.push(person);
+          this.requests.push(person.destinationFloor);
           this.waitingList.splice(index, 1);
-          console.log(`${person.name} has entered the elevator. He smells`);
+          console.log(`${person.name} has entered the elevator`);
         }
       })
 
+      // Check if someone needs to leave
       this.passengers.forEach((passenger, index) => {
         if (passenger.destinationFloor === this.floor) {
           this.passengers.splice(index, 1);
-          console.log(`${passenger.name} has left the elevator. He arrived`);
+          console.log(`${passenger.name} has left the elevator`);
         }
       })
 
-      if (this.floor === 0 || this.floor === this.MAXFLOOR) {
-        this._switchDirection();
-      }
-
-      console.log("Waiting List: ", this.waitingList);
-      console.log("Passengers: ", this.passengers);
+      // Check if we need to reverse
+      this._checkSwitchDirection();
     }
   }
 
   floorUp() {
     if (this.floor < this.MAXFLOOR) {
       this.floor++;
-      this.direction = "up";
+      // console.log("Subiendo");
     }
   }
 
   floorDown() {
     if (this.floor >= 0) {
       this.floor--;
-      this.direction = "down";
+      // console.log("Bajando");
     }
   }
 
   call(person) {
     this.waitingList.push(person);
-
-    this.requests = this._sortWaitingRequests();
+    this.requests.push(person.originFloor);
+    this.requests = _.sortBy(_.uniq(this.requests))
   }
 
-  _sortWaitingRequests() {
-
-    let floorsRequested = [];
-
-    this.waitingList.forEach((person) => {
-      if(!floorsRequested.includes(person.originFloor))
-        floorsRequested.push(person.originFloor);
-      if(!floorsRequested.includes(person.destinationFloor))
-        floorsRequested.push(person.destinationFloor);
-    })
-
-    if (this.direction === "up") {
-      return floorsRequested.sort((a, b) => {
-        return a - b;
-      })
-    } else {
-      return floorsRequested.sort((a, b) => {
-        return b - a;
-      })
+  _checkSwitchDirection () {
+    if (( this.direction === "up" &&
+          this.floor > _.max(this.requests)) ||
+        ( this.direction === "down" &&
+         this.floor < _.min(this.requests))) {
+       console.log('change direction!')
+       this.direction = this.direction === "up" ? "down" : "up";
     }
   }
 
-  _switchDirection () {
-    this.direction = this.direction === "up" ? "down" : "up";
-  }
+  _waitNames ()      { return _.map(this.waitingList, 'name'); }
+  _passengernames () { return _.map(this.passengers,  'name'); }
 
   log() {
-    console.log(`Idle: ${this.idle} | Floor: ${this.floor} | Request: ${this.currentReq} | Requests: ${this.requests}`);
+    console.log(`Direction: ${this.direction} | Idle: ${this.idle} | Floor: ${this.floor} | Waiting List: ${ this._waitNames() } | Passengers: ${this._passengernames()} | Requests: ${this.requests}`);
   }
 }
 
