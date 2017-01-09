@@ -9,6 +9,7 @@ class Elevator {
     this.requests   = [];
     this.idle       = true; //when true, the elevator is not serving any request
     this.passengers = [];
+    this.direction  = "up";
     this.currentReq = null;
   }
 
@@ -36,44 +37,62 @@ class Elevator {
         this.currentReq = null;
       }
 
-      si this.request.at === this.floor
-         this.people.push this.request.shift
-         console "hemos llegado a tu planta"
-      si this.people.to === this.floor
-         this.people.shift
-         console "te dejamos en tu planta"
+      // si this.request.at === this.floor
+      //    this.passengers.push this.request.shift
+      //    console "hemos llegado a tu planta"
+      // si this.passengers.to === this.floor
+      //    this.passengers.shift
+      //    console "te dejamos en tu planta"
     }
   }
 
-  floorUp() {
+  floorUp () {
     if (this.floor < this.MAXFLOOR) {
       this.floor++;
-      this.passengers.forEach((person) => {
-        person.at = this.floor;
-      })
     }
   }
 
-  floorDown() {
+  floorDown () {
     if (this.floor >= 0) {
       this.floor--;
-      this.passengers.forEach((person) => {
-        person.at = this.floor;
-      })
     }
   }
 
   call (person) {
-    if(!this.requests.includes(person.at)) {
-      this.requests.push(person.at);
-    }
-    if(!this.requests.includes(person.to)) {
-      this.requests.push(person.to);
-    }
+    this.requests.push(person.originFloor);
+    this.requests.push(person.destinationFloor);
+
+    this.requests = _sortRequests();
+
+    // if(!this.requests.includes(person.at)) {
+    //   this.requests.push(person.at);
+    // }
+    // if(!this.requests.includes(person.to)) {
+    //   this.requests.push(person.to);
+    // }
   }
 
-  log() {
+  log () {
     console.log(`Idle: ${this.idle} | Floor: ${this.floor} | Request: ${this.currentReq} | Requests: ${this.requests}`);
+  }
+
+  _sortRequests () {
+    if (this.direction === "up") {
+      return this.requests.sort((a, b) => {
+        return a - b;
+      })
+    } else {
+      return this.requests.sort((a, b) => {
+        return b - a;
+      })
+    }
+
+  }
+
+  _updatePassengers () {
+    this.passengers.forEach(() => {
+
+    })
   }
 }
 

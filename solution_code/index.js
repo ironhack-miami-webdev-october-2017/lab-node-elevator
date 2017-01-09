@@ -2,11 +2,13 @@ const Person = require('./person.js');
 const Floor = require('./floor.js');
 const Elevator = require('./elevator.js');
 
+let pedro = new Person("Pedro", 0, 5);
+
 let elevator = new Elevator();
 elevator.start();
 
-elevator.call({at: 0, to: 5});
-elevator.call({at: 5, to: 3});
+elevator.call(pedro);
+// elevator.call({at: 5, to: 3});
 
 setTimeout(() => {elevator.call({at: 3, to: 5})}, 10000);
 

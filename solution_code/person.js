@@ -1,11 +1,8 @@
 class Person {
-  constructor(name, destinationFloor){
+  constructor(name, originFloor, destinationFloor){
     this.name = name;
+    this.originFloor = originFloor;
     this.destinationFloor = destinationFloor;
-  }
-
-  destinationArrived(){
-    console.log(`${this.name}: I arrived to my destination`);
   }
 }
 
