@@ -10,7 +10,7 @@ class Elevator {
     this.idle        = true; //when true, the elevator is not serving any request
     this.waitingList = [];
     this.passengers  = [];
-    this.direction   = "up";
+    this.direction   = null;
     this.currentReq  = null;
   }
 
@@ -28,7 +28,7 @@ class Elevator {
       this.currentReq = this.requests.shift();
     } else {
       if(this.requests.length !== 0 || this.currentReq){ this.log() };
-      console.log(this.currentReq);
+
       if (this.currentReq < this.floor) {
         console.log("Bajando");
         this.floorDown();
@@ -55,6 +55,10 @@ class Elevator {
           console.log(`${passenger.name} has left the elevator. He arrived`);
         }
       })
+
+      if (this.floor === 0 || this.floor === this.MAXFLOOR) {
+        this._switchDirection();
+      }
 
       console.log("Waiting List: ", this.waitingList);
       console.log("Passengers: ", this.passengers);
@@ -101,6 +105,10 @@ class Elevator {
         return b - a;
       })
     }
+  }
+
+  _switchDirection () {
+    this.direction = this.direction === "up" ? "down" : "up";
   }
 
   log() {
