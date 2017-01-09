@@ -9,7 +9,7 @@ class Elevator {
     this.requests   = [];
     this.idle       = true; //when true, the elevator is not serving any request
     this.passengers = [];
-    this.currentReq = -1;
+    this.currentReq = null;
   }
 
   start(){
