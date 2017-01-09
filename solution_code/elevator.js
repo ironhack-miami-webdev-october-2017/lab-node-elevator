@@ -38,6 +38,14 @@ class Elevator {
         this.currentReq = null;
 
       }
+      this.passengers.forEach((passenger) => {
+        if (passenger.originFloor === this.floor) {
+          console.log(`${passenger.name} has entered the elevator`);
+        }
+        if (passenger.destinationFloor === this.floor) {
+          console.log(`${passenger.name} has left the elevator`);
+        }
+      })
 
       // si this.request.at === this.floor
       //    this.passengers.push this.request.shift
@@ -62,16 +70,7 @@ class Elevator {
 
   call(person) {
     this.passengers.push(person);
-
     this.requests = this._sortPassengerRequests();
-    console.log(this.requests);
-
-    // if(!this.requests.includes(person.at)) {
-    //   this.requests.push(person.at);
-    // }
-    // if(!this.requests.includes(person.to)) {
-    //   this.requests.push(person.to);
-    // }
   }
 
   _sortPassengerRequests() {
