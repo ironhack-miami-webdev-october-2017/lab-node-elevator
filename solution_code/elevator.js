@@ -6,11 +6,10 @@ class Elevator {
   constructor(){
     this.floor      = 0;
     this.MAXFLOOR   = 5;
-    this.requests   = []; //
-    // this.requests   = [];  Requests array
-    this.idle       = true; //not serving any request at the moment
-    this.currentReq = null;
+    this.requests   = [];
+    this.idle       = true; //when true, the elevator is not serving any request
     this.passengers = [];
+    this.currentReq = -1;
   }
 
   start(){
