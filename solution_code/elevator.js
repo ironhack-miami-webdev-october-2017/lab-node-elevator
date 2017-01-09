@@ -70,6 +70,7 @@ class Elevator {
 
   call(person) {
     this.passengers.push(person);
+
     this.requests = this._sortPassengerRequests();
   }
 
@@ -98,4 +99,5 @@ class Elevator {
     console.log(`Idle: ${this.idle} | Floor: ${this.floor} | Request: ${this.currentReq} | Requests: ${this.requests}`);
   }
 }
+
 module.exports = Elevator;
