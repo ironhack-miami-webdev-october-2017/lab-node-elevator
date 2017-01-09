@@ -24,7 +24,7 @@ class Elevator {
   update(){
     if (this.idle && this.requests.length !== 0) {
       this.idle = false;
-      this.currentReq = this.requests[0];
+      this.currentReq = this.requests.shift();
     } else {
       if(this.requests.length !== 0 || this.currentReq){ this.log() };
 
@@ -34,7 +34,9 @@ class Elevator {
         this.floorUp();
       } else {
         this.idle = true;
+        console.log(this.floor);
         this.currentReq = null;
+
       }
 
       // si this.request.at === this.floor
@@ -46,23 +48,23 @@ class Elevator {
     }
   }
 
-  floorUp () {
+  floorUp() {
     if (this.floor < this.MAXFLOOR) {
       this.floor++;
     }
   }
 
-  floorDown () {
+  floorDown() {
     if (this.floor >= 0) {
       this.floor--;
     }
   }
 
-  call (person) {
-    this.requests.push(person.originFloor);
-    this.requests.push(person.destinationFloor);
+  call(person) {
+    this.passengers.push(person);
 
-    this.requests = _sortRequests();
+    this.requests = this._sortPassengerRequests();
+    console.log(this.requests);
 
     // if(!this.requests.includes(person.at)) {
     //   this.requests.push(person.at);
@@ -72,28 +74,29 @@ class Elevator {
     // }
   }
 
-  log () {
-    console.log(`Idle: ${this.idle} | Floor: ${this.floor} | Request: ${this.currentReq} | Requests: ${this.requests}`);
-  }
+  _sortPassengerRequests() {
 
-  _sortRequests () {
+    let floorsRequested = [];
+
+    this.passengers.forEach((passenger) => {
+      if(!floorsRequested.includes(passenger.originFloor))
+        floorsRequested.push(passenger.originFloor);
+      if(!floorsRequested.includes(passenger.destinationFloor))
+        floorsRequested.push(passenger.destinationFloor);
+    })
     if (this.direction === "up") {
-      return this.requests.sort((a, b) => {
+      return floorsRequested.sort((a, b) => {
         return a - b;
       })
     } else {
-      return this.requests.sort((a, b) => {
+      return floorsRequested.sort((a, b) => {
         return b - a;
       })
     }
-
   }
 
-  _updatePassengers () {
-    this.passengers.forEach(() => {
-
-    })
+  log() {
+    console.log(`Idle: ${this.idle} | Floor: ${this.floor} | Request: ${this.currentReq} | Requests: ${this.requests}`);
   }
 }
-
 module.exports = Elevator;
