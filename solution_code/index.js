@@ -2,20 +2,13 @@ const Person = require('./person.js');
 const Floor = require('./floor.js');
 const Elevator = require('./elevator.js');
 
-class ElevatorManager {
-  constructor(elevator){
-    this.elevator = elevator;
-  }
-}
+let elevator = new Elevator();
+elevator.start();
 
-let elevator = new Elevator(floors);
-let manager = new ElevatorManager(elevator)
-manager.elevator.start();
+elevator.call({at: 0, to: 5});
+elevator.call({at: 5, to: 3});
 
-manager.elevator.call(3);
-manager.elevator.call(1);
-
-setTimeout(() => {manager.elevator.call(3)}, 10000);
+setTimeout(() => {elevator.call({at: 3, to: 5})}, 10000);
 
 // let rafael = new Person("Rafael", 5);
 // let sara = new Person("Sara", 4);
