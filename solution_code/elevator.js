@@ -40,10 +40,10 @@ class Elevator {
       }
       this.passengers.forEach((passenger) => {
         if (passenger.originFloor === this.floor) {
-          console.log(`${passenger.name} has entered the elevator`);
+          console.log(`${passenger.name} has entered the elevator. He smells`);
         }
         if (passenger.destinationFloor === this.floor) {
-          console.log(`${passenger.name} has left the elevator`);
+          console.log(`${passenger.name} has left the elevator. He arrived`);
         }
       })
 
