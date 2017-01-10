@@ -39,27 +39,34 @@ class Elevator {
         this.floorDown();
       }
 
-      // Check if someone needs to enter
-      this.waitingList.forEach((person, index) => {
-        if (person.originFloor === this.floor) {
-          this.passengers.push(person);
-          this.requests.push(person.destinationFloor);
-          this.waitingList.splice(index, 1);
-          console.log(`${person.name} has entered the elevator`);
-        }
-      })
-
-      // Check if someone needs to leave
-      this.passengers.forEach((passenger, index) => {
-        if (passenger.destinationFloor === this.floor) {
-          this.passengers.splice(index, 1);
-          console.log(`${passenger.name} has left the elevator`);
-        }
-      })
+      this._passengersEnter();
+      this._passengersLeave();
 
       // Check if we need to reverse
       this._checkSwitchDirection();
     }
+  }
+
+  // Check if someone needs to enter
+  _passengersEnter() {
+    this.waitingList.forEach((person, index) => {
+      if (person.originFloor === this.floor) {
+        this.passengers.push(person);
+        this.requests.push(person.destinationFloor);
+        this.waitingList.splice(index, 1);
+        console.log(`${person.name} has entered the elevator`);
+      }
+    })
+  }
+
+  // Check if someone needs to leave
+  _passengersLeave () {
+    this.passengers.forEach((passenger, index) => {
+      if (passenger.destinationFloor === this.floor) {
+        this.passengers.splice(index, 1);
+        console.log(`${passenger.name} has left the elevator`);
+      }
+    })
   }
 
   floorUp() {

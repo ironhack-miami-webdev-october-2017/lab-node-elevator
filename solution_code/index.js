@@ -1,5 +1,6 @@
 const Person = require('./person.js');
 const Elevator = require('./elevator.js');
+const _ = require('lodash');
 
 // let pedro = new Person("Pedro", 1, 5);
 let isa  = new Person("Isa",  2, 6);
