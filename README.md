@@ -11,7 +11,7 @@ After this learning unit, you will be able to:
 - Create callback functions to respond asynchronously to the orders recieved
 - Original idea: http://play.elevatorsaga.com/
 
-<iframe src="//giphy.com/embed/P8XjmO1TTX3Nu" width="480" height="211" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/elf-elevator-P8XjmO1TTX3Nu">via GIPHY</a></p>
+![](https://media.giphy.com/media/P8XjmO1TTX3Nu/giphy.gif)
 
 ## Introduction
 
