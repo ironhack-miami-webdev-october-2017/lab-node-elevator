@@ -42,12 +42,12 @@ class Elevator {
       this._passengersEnter();
       this._passengersLeave();
 
-      // Check if we need to reverse
+      // Check if the elevator needs to reverse
       this._checkSwitchDirection();
     }
   }
 
-  // Check if someone needs to enter
+
   _passengersEnter() {
     this.waitingList.forEach((person, index) => {
       if (person.originFloor === this.floor) {
@@ -59,7 +59,7 @@ class Elevator {
     })
   }
 
-  // Check if someone needs to leave
+
   _passengersLeave () {
     this.passengers.forEach((passenger, index) => {
       if (passenger.destinationFloor === this.floor) {
@@ -72,14 +72,12 @@ class Elevator {
   floorUp() {
     if (this.floor < this.MAXFLOOR) {
       this.floor++;
-      // console.log("Subiendo");
     }
   }
 
   floorDown() {
     if (this.floor >= 0) {
       this.floor--;
-      // console.log("Bajando");
     }
   }
 
