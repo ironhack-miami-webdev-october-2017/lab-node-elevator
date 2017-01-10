@@ -1,5 +1,4 @@
 const Person = require('./person.js');
-const Floor = require('./floor.js');
 const Elevator = require('./elevator.js');
 
 // let pedro = new Person("Pedro", 1, 5);
