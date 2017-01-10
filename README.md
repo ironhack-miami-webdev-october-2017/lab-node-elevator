@@ -1,5 +1,3 @@
-![Ironhack Logo](https://i.imgur.com/1QgrNNw.png)
-
 # Node | The Elevator
 
 ## Learning Goals
@@ -11,7 +9,7 @@ After this learning unit, you will be able to:
 - Create callback functions to respond asynchronously to the orders recieved
 - Original idea: http://play.elevatorsaga.com/
 
-![](https://media.giphy.com/media/P8XjmO1TTX3Nu/giphy.gif)
+![Crazy giphy](https://media.giphy.com/media/P8XjmO1TTX3Nu/giphy.gif)
 
 ## Introduction
 
@@ -21,7 +19,7 @@ The elevator will have a queue where is going to store all the request in the or
 
 ### Requirements
 
-- [Fork this repo (Pending)]()
+- [Fork this repo](https://guides.github.com/activities/forking/)
 - Clone this repo into your `~/code/labs`
 
 ## Submission
@@ -43,41 +41,99 @@ In your starter code folder you will find every file you need to finish the game
 
 ### Iteration 1
 
-In the `starter_code` we will have an `elevator.js` file where we will develop the *Elevator* class, a `person.js` file where we will create the *Person* class and an `index.js` file where we will create the objects of this classes and operate with them.
+In the `starter_code` we will have:
+
+- An `elevator.js` file 
+- A `person.js` file
+- An `index.js` file to instance these classes and operate with them. Remember to require the other files in this file.
+
+Most of the functions we need to create -if not all of them- are executed by the `elevator`, so we will begin to code in the `elevator.js` file.
 
 #### The *Elevator* class
 
-An elevator will have the capability to: 
+First, the elevator needs to move. We will take care of what triggers the movement later.
 
-- Start listening for requests
-- Stop listening for requests
-- Receive a new request to store it in the elevator list
-- Update the elevator position going to the requested floors
-- Remove a request from the list once is completed
-- Go up floor by floor
-- Go down floor by floor
-- Print in the console the actual status of the elevator in the next format:
-  `Direction: up | Floor: 0 | Requests: 3,6,10,0`
+In order to make it move, it will need a direction and a current position (floor). Let's focus on four main metods:
+
+- For now, the `update` function will display in the console the actual status of the elevator by calling the `log` function.
+- The `log` function will only print the information related with position and direction:
+```
+Direction: up | Floor: 0
+```
+- The `start` function will call the `update` function every second to prompt the execution.
+- The `stop` function will cease the elevator's listening for requests.
+
+:::success
+:bulb: These last two functions are key to the exercise. Remember to use JavaScript functions as `setTimeOut()` to create the listener
+:::
 
 ### Iteration 2
 
-When elevators travel up and down to pick up and leave passengers, people actually come into the elevator.
+In the second iteration, the elevator will move up and down regarding its direction and the petitions requested.
 
-Create a new object to model people.
+We are going to create a function `floorUp` to update the actual floor by incrementing one to the current position. So, if the actual floor was 0, it will turn 1.
+
+Also, we will create a similar function called `floorDown` to update the actual floor by substracting one to the current position. So, if the actual floor was 6, it will turn 5.
+
+:::danger
+Remember to consider the limits of the elevator, so you won't go further the top floor or below the entrance level
+:::
+
+:::info
+Test the elevator. Make it go to the top floor and the entrance level by using `floorUp` and `floorDown` displaying it in the console with `log`
+:::
+
+### Iteration 3
+
+Elevators pick up and leave passengers, so we will have to model those passengers. Let’s use our class Person to describe a Person.
 
 #### The *Person* class
 
-- A person will have a name, an `originFloor` and a `destinationFloor`
+A person will have:
+- A `name`
+- An `originFloor`
+- A `destinationFloor`
 
-Use this object to add people into the elevator. You will have three different lists:
+Now, we need to think about what happens when a person ‘calls’ the elevator. In the Elevator class, we will create the `call` method. This method should add a request into the elevator’s queue. A good idea would be to add the whole person object to the requests collection.
 
-- People waiting for the elevator -they made the request and they're waiting the elevator to come
-- People currently in the elevator (passengers)
-- A list of pending requests
+We will then process the list of requests in order for the elevator to process them. We will need a list of floors that the elevator should serve in the `update` method.
 
-You should display passenger's names in the console as they come and go specifying if a person recently entered or left the elevator.
+### Iteration 4
 
-Good luck!
+When elevators travel up and down to pick up and leave passengers, people actually come into the elevator.
+
+To keep a track of everyone without messing all up, you will have three different lists:
+
+- `waitingList`: people waiting for the elevator -they made the request and they're waiting the elevator to come
+- `passengers`: people currently in the elevator
+- `requests`: a list of pending requests
+
+#### The Waiting List
+
+When a person calls the elevator (the `call` function is executed), we will add that person into the `waitingList` array. Notice they're not in the `passengers` collection because they're not yet in the elevator.
+
+Also, add the (`originFloor`) to the `requests` array to let the elevator know where it has to stop to pick the passanger up.
+
+#### A passenger enters the elevator
+
+When the elevator arrives to a floor, it should check the `waitingList` array to verify if a person is waiting there. If this condition occurs, add the person into the `passengers` array and delete the entry from the `waitingList` array.
+
+We will show a message to indicate what just happens:
+
+`Julia has enter the elevator`
+
+#### A passenger leaves the elevator
+
+When the elevator arrives to a floor, it should check the `passengers` collection. If a passenger's `destinationFloor` matches the current floor,  we will delete that person from the `passengers` array.
+
+We will show a message to indicate what just happens:
+
+`Julia has left the elevator`
+
+
+**Good luck!**
+
+
 
 ![Giphy IMAGE](https://media.giphy.com/media/l0MYIyrdQeWyEtQm4/giphy.gif)
 
@@ -85,3 +141,10 @@ Good luck!
 
 - [The Elevator Saga](http://play.elevatorsaga.com/)
 - [Codepen](http://codepen.io/brigham/pen/AErDk) - Ok, we're in the backend, right? But this is a pretty simulation :stuck_out_tongue_closed_eyes: 
+
+
+
+
+
+## Extra resources
+
