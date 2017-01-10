@@ -79,7 +79,7 @@ You should display passenger's names in the console as they come and go specifyi
 
 Good luck!
 
-<iframe src="//giphy.com/embed/l0MYIyrdQeWyEtQm4" width="480" height="418" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/foxhomeent-sad-tired-l0MYIyrdQeWyEtQm4">via GIPHY</a></p>
+![Giphy IMAGE](https://media.giphy.com/media/l0MYIyrdQeWyEtQm4/giphy.gif)
 
 ## Extra resources
 
