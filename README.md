@@ -32,6 +32,7 @@ $ git add .
 $ git commit -m "done"
 $ git push origin master
 ```
+
 Navigate to your repo and create a Pull Request -from your master branch to the original repository master branch.
 
 In the Pull request name, add your name and last names separated by a dash "-"
@@ -65,9 +66,11 @@ Direction: up | Floor: 0
 - The `start` function will call the `update` function every second to prompt the execution.
 - The `stop` function will cease the elevator's listening for requests.
 
-:::success
-:bulb: These last two functions are key to the exercise. Remember to use JavaScript functions as `setTimeOut()` to create the listener
-:::
+```
+These last two functions are key to the exercise. 
+Remember to use JavaScript functions such as
+`setTimeOut()` to create the listener
+```
 
 ### Iteration 2
 
@@ -77,13 +80,16 @@ We are going to create a function `floorUp` to update the actual floor by increm
 
 Also, we will create a similar function called `floorDown` to update the actual floor by substracting one to the current position. So, if the actual floor was 6, it will turn 5.
 
-:::danger
-Remember to consider the limits of the elevator, so you won't go further the top floor or below the entrance level
-:::
 
-:::info
-Test the elevator. Make it go to the top floor and the entrance level by using `floorUp` and `floorDown` displaying it in the console with `log`
-:::
+> Remember to consider the limits of the elevator, so you won't go further the top floor or below the entrance level
+
+
+```
+Test the elevator. 
+Make it go to the top floor and the entrance level 
+by using `floorUp` and `floorDown` 
+displaying it in the console with `log`
+```
 
 ### Iteration 3
 
@@ -96,9 +102,7 @@ A person will have:
 - An `originFloor`
 - A `destinationFloor`
 
-:::info
-:warning: The `person.js` file is not included in your starter-code, so you will have to create a new file
-:::
+> The `person.js` file is not included in your starter-code, so you will have to create a new file
 
 Now, we need to think about what happens when a person ‘calls’ the elevator. In the Elevator class, we will create the `call` method. This method should add a request into the elevator’s queue. A good idea would be to add the whole person object to the requests collection.
 
@@ -138,7 +142,6 @@ We will show a message to indicate what just happens:
 
 
 **Good luck!**
-
 
 
 ![Giphy IMAGE](https://media.giphy.com/media/l0MYIyrdQeWyEtQm4/giphy.gif)
