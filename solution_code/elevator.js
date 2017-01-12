@@ -1,6 +1,3 @@
-// First iteration everyone is in the basement
-// People is in different floors and wants to go to different floors. One by one.
-//
 var _ = require('lodash');
 
 class Elevator {
@@ -42,7 +39,7 @@ class Elevator {
       this._passengersEnter();
       this._passengersLeave();
 
-      // Check if the elevator needs to reverse
+      // Check if the elevator needs to reverse direction
       this._checkSwitchDirection();
     }
   }
@@ -88,10 +85,8 @@ class Elevator {
   }
 
   _checkSwitchDirection () {
-    if (( this.direction === "up" &&
-          this.floor > _.max(this.requests)) ||
-        ( this.direction === "down" &&
-         this.floor < _.min(this.requests))) {
+    if (( this.direction === "up"   && this.floor > _.max(this.requests)) ||
+        ( this.direction === "down" && this.floor < _.min(this.requests))) {
        console.log('change direction!')
        this.direction = this.direction === "up" ? "down" : "up";
     }
