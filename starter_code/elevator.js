@@ -1,39 +1,19 @@
 class Elevator {
   constructor(){
     this.floor      = 0;
-    this.MAXFLOOR   = 5;
+    this.MAXFLOOR   = 10;
     this.requests   = [];
-    this.idle       = true; //not serving any request at the moment
-    this.currentReq = null;
   }
 
-  start(){
-
-  }
-
-  stop(){
-
-  }
-
-  update(){
-
-  }
-
-  floorUp() {
-
-  }
-
-  floorDown() {
-
-  }
-
-  call(floor) {
-
-  }
-
-  log() {
-  
-  }
+  start() { }
+  stop() { }
+  update() { }
+  _passengersEnter() { }
+  _passengersLeave() { }
+  floorUp() { }
+  floorDown() { }
+  call() { }
+  log() { }
 }
 
 module.exports = Elevator;
