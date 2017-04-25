@@ -21,8 +21,13 @@ class Elevator {
   }
 
   update(){
+
     this.log();
     if (this.requests.length !== 0) {
+
+      this._passengersEnter();
+      this._passengersLeave();
+
       this.requests = _.sortBy(_.uniq(this.requests))
 
       if (this.requests.includes(this.floor)) {
@@ -35,9 +40,6 @@ class Elevator {
       if (this.direction === "down" && _.min(this.requests) < this.floor) {
         this.floorDown();
       }
-
-      this._passengersEnter();
-      this._passengersLeave();
 
       // Check if the elevator needs to reverse direction
       this._checkSwitchDirection();
@@ -79,6 +81,7 @@ class Elevator {
   }
 
   call(person) {
+    console.log("call")
     this.waitingList.push(person);
     this.requests.push(person.originFloor);
     this.requests = _.sortBy(_.uniq(this.requests))
